@@ -10,40 +10,37 @@ module.exports = class CamoTalker extends Plugin {
   startPlugin () {
     this.injection()
 
-    quickRegister({
-      command: 'camouflage',
-      aliases: ['cf', 'camo'],
-      description: 'Surrounds a message with zero width characters.',
-      usage: '{c} [text]', 
-      executor: (args) => ({
+    quickRegister(
+      'camouflage',
+      ['cf', 'camo'],
+      'Surrounds a message with zero width characters.',
+      '{c} [text]', 
+      (args) => ({
         send: true, 
         result: args.join(' ').split('').map((char => {
           return char + zeroWidth[(Math.floor(Math.random() * 3))]
         })).join('').slice(0, -1)
       })
-    })
+    )
 
-    quickRegister({
-      command: "decamouflage",
-      aliases: [
-        "dcf",
-         "decamo"
-        ],
-        description: 'Sends a non-camouflaged message. Useful if you want to keep camouflaging toggled on.',
-        usage: '{c} [text]',
-        executor: (args) => ({
-          send: true,
-          result: args.join(' ') // just send the raw text
-        })
-    })
+    quickRegister(
+      "decamouflage",
+      [ "dcf", "decamo"],
+      'Sends a non-camouflaged message. Useful if you want to keep camouflaging toggled on.',
+      '{c} [text]',
+      (args) => ({
+        send: true,
+        result: args.join(' ') // just send the raw text
+      })
+    )
 
-    quickRegister({
-      command: 'camotoggle',
-      aliases: ['cft', 'ct'],
-      description: 'Automatically camouflages all of your messages.',
-      usage: '{c} [text]', 
-      executor: this.toggleAuto.bind(this)
-    })
+    quickRegister(
+      'camotoggle',
+      ['cft', 'ct'],
+      'Automatically camouflages all of your messages.',
+      '{c} [text]', 
+      this.toggleAuto.bind(this)
+    )
   }
 
   async injection() {
