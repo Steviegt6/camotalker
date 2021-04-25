@@ -22,6 +22,20 @@ module.exports = class CamoTalker extends Plugin {
       })
     })
 
+    quickRegister({
+      command: "decamouflage",
+      aliases: [
+        "dcf",
+         "decamo"
+        ],
+        description: 'Sends a non-camouflaged message. Useful if you want to keep camouflaging toggled on.',
+        usage: '{c} [text]',
+        executor: (args) => ({
+          send: true,
+          result: args.join(' ') // just send the raw text
+        })
+    })
+
     powercord.api.commands.registerCommand({
       command: 'camotoggle',
       aliases: ['cft', 'ct'],
@@ -66,4 +80,8 @@ module.exports = class CamoTalker extends Plugin {
     powercord.api.commands.unregisterCommand('camouflage')
     powercord.api.commands.unregisterCommand('camotoggle')
   }
+}
+
+function quickRegister(a) {
+  powercord.api.commands.registerCommand(a);
 }

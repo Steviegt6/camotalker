@@ -1,7 +1,7 @@
 {
     "name": "Camotalker",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Surrounds your messages with zero width unicode characters. Useful for getting around bot restrictions or hiding your messages from built in search.",
-    "author": "Swishilicous",
+    "author": "Swishilicous, convicted tomatophile",
     "license": "Unlicensed"
 }
