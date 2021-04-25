@@ -21,7 +21,7 @@ module.exports = class CamoTalker
       (args) => ({
         send: true, 
         result: args.join(' ').split('').map((char => {
-          if ((workingMarkdown && markdownCharacters.includes(char)) || random(3) == 2 /* 1/3 chance */)
+          if ((workingMarkdown && markdownCharacters.includes(char)) || random(3) < 2 /* 1/3 chance */)
             return char; // working md ensurance and minimizing the amount of zero-widths to preserve room for typing
 
           return char + zeroWidth[random(3)];
@@ -65,7 +65,7 @@ module.exports = class CamoTalker
 
       if (camouflageAuto)
         text = text.split('').map((char => {
-          if ((workingMarkdown && markdownCharacters.includes(char)) || random(3) == 2 /* 1/3 chance */)
+          if ((workingMarkdown && markdownCharacters.includes(char)) || random(3) < 2 /* 1/3 chance */)
             return char; // working md ensurance and minimizing the amount of zero-widths to preserve room for typing
 
           return char + zeroWidth[random(3)];
