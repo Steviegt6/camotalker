@@ -21,10 +21,10 @@ module.exports = class CamoTalker
       (args) => ({
         send: true, 
         result: args.join(' ').split('').map((char => {
-          if (workingMarkdown && markdownCharacters.includes(char)) // working md ensurance
-            return char;
+          if ((workingMarkdown && markdownCharacters.includes(char)) || random(3) == 2 /* 1/3 chance */)
+            return char; // working md ensurance and minimizing the amount of zero-widths to preserve room for typing
 
-          return char + zeroWidth[(Math.floor(Math.random() * 3))];
+          return char + zeroWidth[random(3)];
         })).join('').slice(0, -1)
       })
     );
@@ -65,10 +65,10 @@ module.exports = class CamoTalker
 
       if (camouflageAuto)
         text = text.split('').map((char => {
-          if (workingMarkdown && markdownCharacters.includes(char))
-            return char; // working md ensurance
+          if ((workingMarkdown && markdownCharacters.includes(char)) || random(3) == 2 /* 1/3 chance */)
+            return char; // working md ensurance and minimizing the amount of zero-widths to preserve room for typing
 
-          return char + zeroWidth[(Math.floor(Math.random() * 3))];
+          return char + zeroWidth[random(3)];
         })).join('').slice(0, -1);
 
       args[1].content = text;
@@ -127,4 +127,8 @@ function quickRegister(command, aliases, description, usage, executor) {
     usage: usage,
     executor: executor
   });
+}
+
+function random(num) {
+  return Math.floor(Math.random() * num);
 }
