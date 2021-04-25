@@ -4,6 +4,7 @@ const { getModule } = require('powercord/webpack')
 
 let camouflageAuto = false
 let zeroWidth = ['​', '‍', '‌']
+let registeredCommands = [];
 
 module.exports = class CamoTalker extends Plugin {
   startPlugin () {
@@ -76,12 +77,21 @@ module.exports = class CamoTalker extends Plugin {
   }
 
   pluginWillUnload () {
-    uninject('camouflage') 
-    powercord.api.commands.unregisterCommand('camouflage')
-    powercord.api.commands.unregisterCommand('camotoggle')
+    uninject('camouflage')
+
+    for (command in registeredCommands)
+      powercord.api.commands.unregisterCommand(command);
   }
 }
 
-function quickRegister(a) {
-  powercord.api.commands.registerCommand(a);
+function quickRegister(command, aliases, description, usage, executor) {
+  registeredCommands.push(command);
+
+  powercord.api.commands.registerCommand({
+    command: command,
+    aliases: aliases,
+    description: description,
+    usage: usage,
+    executor: executor
+  });
 }
