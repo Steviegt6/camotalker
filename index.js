@@ -9,7 +9,7 @@ module.exports = class CamoTalker extends Plugin {
   startPlugin () {
     this.injection()
 
-    powercord.api.commands.registerCommand({
+    quickRegister({
       command: 'camouflage',
       aliases: ['cf', 'camo'],
       description: 'Surrounds a message with zero width characters.',
@@ -36,7 +36,7 @@ module.exports = class CamoTalker extends Plugin {
         })
     })
 
-    powercord.api.commands.registerCommand({
+    quickRegister({
       command: 'camotoggle',
       aliases: ['cft', 'ct'],
       description: 'Automatically camouflages all of your messages.',
